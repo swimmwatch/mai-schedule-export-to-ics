@@ -28,7 +28,7 @@ def main():
         print(Fore.GREEN, Style.BRIGHT, " Ok", Style.RESET_ALL)
 
         opts = Options()
-        opts.set_headless()
+        opts.headless = True
         browser = Firefox(options=opts)
         base_url = f"{MAI_SCHEDULE_DETAIL}?group={group_id}"
 
