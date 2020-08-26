@@ -18,7 +18,7 @@ pip install -r requirements.txt
 
 4. Run program!
 ```bash
-python main.py
+python main.py --group М8О-310Б-18
 ```
 
 ## Command line arguments
