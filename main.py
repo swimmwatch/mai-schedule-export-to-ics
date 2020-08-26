@@ -1,5 +1,6 @@
 import datetime
 import pytz
+import argparse
 from colorama import Fore, Style
 from ics import Calendar, Event
 from selenium.common.exceptions import NoSuchElementException
@@ -11,10 +12,9 @@ from exceptions import NoSuchGroupID
 from schedule import exist_group
 
 
-def main():
-    group_id = input(Fore.WHITE + Style.BRIGHT + "Enter group id: "
-                     + Style.RESET_ALL)
-    result_filename = f"{group_id}.ics"
+def main(cmd_args):
+    group_id = cmd_args.group
+    result_filename = cmd_args.out
     local = pytz.timezone("Europe/Moscow")
     study_calendar = Calendar()
 
@@ -119,4 +119,12 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description='Simple script for creating '
+                                                 'iCalendar studying schedule'
+                                                 ' MAI.')
+    parser.add_argument('--group', help='Group ID', required=True)
+    parser.add_argument('--out', help='Output file name', default="output.ics")
+
+    args = parser.parse_args()
+
+    main(args)
