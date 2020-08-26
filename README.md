@@ -21,4 +21,6 @@ pip install -r requirements.txt
 python main.py
 ```
 
-When the program starts, you need to enter the full group id. After the program is completed, a file will be created in the current directory.
+## Command line arguments
+- `--out` - Set output file name
+- `--group` - Set group id
