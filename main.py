@@ -1,7 +1,6 @@
 import datetime
 import pytz
 import argparse
-from colorama import Fore, Style
 from ics import Calendar, Event
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver import Firefox
@@ -19,13 +18,12 @@ def main(cmd_args):
     study_calendar = Calendar()
 
     try:
-        print(Fore.WHITE, Style.BRIGHT, "Checking for the existence of a "
-                                        "group...", Style.RESET_ALL, end="")
+        print("Checking for the existence of a group...", end="")
 
         if not exist_group(group_id):
             raise NoSuchGroupID(group_id)
 
-        print(Fore.GREEN, Style.BRIGHT, " Ok", Style.RESET_ALL)
+        print(" Ok")
 
         opts = Options()
         opts.headless = True
@@ -34,8 +32,7 @@ def main(cmd_args):
 
         browser.get(base_url)
 
-        print(Fore.WHITE, Style.BRIGHT, "Number of university weeks:",
-              Style.RESET_ALL, end="")
+        print("Number of university weeks:", end="")
 
         # get all weeks
         number_study_weeks = len(
@@ -45,8 +42,7 @@ def main(cmd_args):
         print(number_study_weeks)
 
         for i in range(1, number_study_weeks + 1):  # iterates over weeks
-            print(Fore.WHITE, Style.BRIGHT, f"\nGetting {i} week schedule...",
-                  Style.RESET_ALL)
+            print(f"\nGetting {i} week schedule...")
 
             browser.get(f"{base_url}&week={i}")
 
@@ -104,18 +100,16 @@ def main(cmd_args):
 
                     study_calendar.events.add(event)
 
-                print(Fore.WHITE, Style.BRIGHT, f'\t{start_date} -', Fore.GREEN,
-                      '\u2713', Style.RESET_ALL)
+                print(f'\t{start_date} -', '\u2713')
 
         # save ics file
         with open(result_filename, "w") as ics_file:
             ics_file.writelines(study_calendar)
 
-        print(Fore.GREEN, Style.BRIGHT,
-              f"\n  Done! Created {result_filename}\n", Style.RESET_ALL)
+        print(f"\n  Done! Created {result_filename}\n")
 
     except NoSuchGroupID as e:
-        print(Fore.RED, Style.BRIGHT, e, Style.RESET_ALL)
+        print(e)
 
 
 if __name__ == "__main__":
