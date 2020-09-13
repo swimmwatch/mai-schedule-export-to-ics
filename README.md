@@ -2,6 +2,8 @@
 
 Simple script for creating iCalendar studying schedule MAI :calendar:
 
+![google calendar with my schedule](images/google_calendar.jpg)
+
 # Install & Run
 
 1. Clone this repository
